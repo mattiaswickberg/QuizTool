@@ -1,0 +1,45 @@
+<!-- frontend/src/components/QuizList.vue -->
+<template>
+    <div class="card-container">
+      <div class="card" v-for="quiz in quizzes" :key="quiz.id">
+        <h2>{{ quiz.name }}</h2>
+        <p>{{ quiz.description }}</p>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: {
+      quizzes: Array
+    }
+  };
+  </script>
+  
+  <style scoped>
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+  }
+  
+  .card h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 0.9em;
+    color: #666;
+  }
+  </style>
+  

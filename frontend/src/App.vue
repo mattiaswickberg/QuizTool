@@ -1,15 +1,18 @@
-// frontend/src/App.vue
+<!-- frontend/src/App.vue -->
 <template>
   <div id="app">
     <h1>Quizzes</h1>
-    <ul>
-      <li v-for="quiz in quizzes" :key="quiz.id">{{ quiz.title }}</li>
-    </ul>
+    <QuizList :quizzes="quizzes" />
   </div>
 </template>
 
 <script>
+import QuizList from './components/QuizList.vue';
+
 export default {
+  components: {
+    QuizList
+  },
   data() {
     return {
       quizzes: []
@@ -25,3 +28,10 @@ export default {
   }
 };
 </script>
+
+<style>
+#app {
+  text-align: center;
+  padding: 20px;
+}
+</style>
