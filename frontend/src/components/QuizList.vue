@@ -1,11 +1,13 @@
 <!-- frontend/src/components/QuizList.vue -->
 <template>
-    <div class="card-container">
-      <router-link :to="{ name: 'Quiz', params: { id: quiz.quiz_id } }" class="card" v-for="quiz in quizzes" :key="quiz.quiz_id">
-        <h2>{{ quiz.title }}</h2>
-        <p>{{ quiz.description }}</p>
-      </router-link>
-    </div>
+      <div v-if="$route.path === '/'">
+        <div class="card-container">
+        <router-link :to="{ name: 'Quiz', params: { id: quiz.quiz_id } }" class="card" v-for="quiz in quizzes" :key="quiz.quiz_id">
+            <h2>{{ quiz.title }}</h2>
+            <p>{{ quiz.description }}</p>
+        </router-link>
+        </div>
+      </div>
   </template>
   
   <script>

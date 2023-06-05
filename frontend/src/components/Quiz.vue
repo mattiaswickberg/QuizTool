@@ -1,10 +1,10 @@
 <!-- frontend/src/components/Quiz.vue -->
 <template>
     <div>
-      <h1>{{ quiz ? quiz.title : 'Loading...' }}</h1>
-      <p>{{ quiz ? quiz.description : '' }}</p>
-      <p v-if="error">{{ error }}</p>
-    </div>
+    <h1>{{ quiz ? quiz.title : 'Loading...' }}</h1>
+    <p>{{ quiz ? quiz.description : '' }}</p>
+    <button @click="$router.push('/')">Back to list</button>
+  </div>
   </template>
   
 
