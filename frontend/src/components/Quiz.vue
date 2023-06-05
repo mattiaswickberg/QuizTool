@@ -1,8 +1,8 @@
 <!-- frontend/src/components/Quiz.vue -->
 <template>
     <div class="quiz">
-      <button @click="goBack">Back to list</button>
       <div v-if="quiz && !quizFinished">
+        <button @click="goBack">Back to list</button>
         <h1>{{ quiz.title }}</h1>
         <p>{{ quiz.description }}</p>
           <div v-for="question in questions" :key="question.question_id" class="question">
@@ -51,6 +51,9 @@
       this.questions = data.questions;
     },
     methods: {
+        goBack() {
+        this.$router.push('/');
+        },
         selectOption(questionId, optionId) {
             this.answers = { ...this.answers, [questionId]: optionId };
         },
@@ -113,7 +116,8 @@
   background-color: #666;
 }
 
-.option-selected {
+.option-selected,
+.option-selected:hover {
   background-color: #4d3366;
 }
 

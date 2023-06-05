@@ -9,6 +9,13 @@
   <script>
   export default {
     props: ['score', 'total'],
+
+    methods: {
+    goBack() {
+        this.$emit('back');
+    },
+    // ... other methods ...
+},
   }
   </script>
   
