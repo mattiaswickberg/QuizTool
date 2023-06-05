@@ -5,7 +5,6 @@ const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 3000
 const helmet = require('helmet')
-const fs = require('fs')
 
 let credentials = require('./credentials.json')
 let hostName = credentials.hostname
@@ -39,6 +38,28 @@ app.get('/quizzes', async (req, res) => {
   }
 })
 
+app.get('/quiz/:id', async (req, res) => {
+    let conn;
+  
+    try {
+      conn = await pool.getConnection();
+      const { id } = req.params;
+      const rows = await conn.query('SELECT * FROM quizzes WHERE quiz_id = ?', [id]);
+  
+      if (rows.length === 0) {
+        res.status(404).send({ error: 'Quiz not found' });
+      } else {
+        res.json(rows[0]);
+      }
+    } catch (err) {
+      res.status(500).send({ error: 'Database error' });
+    } finally {
+      if (conn) {
+        conn.end();
+      }
+    }
+  });
+  
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`)
 })

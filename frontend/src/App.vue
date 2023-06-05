@@ -2,6 +2,7 @@
 <template>
   <div id="app">
     <h1>Quizzes</h1>
+    <router-view/>
     <QuizList :quizzes="quizzes" />
   </div>
 </template>
