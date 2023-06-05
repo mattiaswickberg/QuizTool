@@ -1,7 +1,7 @@
 // frontend/src/router/index.js
-import { createRouter, createWebHashHistory } from 'vue-router';
-import QuizList from '../components/QuizList.vue';
-import Quiz from '../components/Quiz.vue';
+import { createRouter, createWebHashHistory } from 'vue-router'
+import QuizList from '../components/QuizList.vue'
+import Quiz from '../components/Quiz.vue'
 
 const routes = [
   {
@@ -15,11 +15,11 @@ const routes = [
     component: Quiz,
     props: true
   }
-];
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
-});
+})
 
-export default router;
+export default router
