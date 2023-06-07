@@ -21,7 +21,7 @@ export default {
   },
   created() {
     // Fetch quizzes from your server
-    fetch('http://localhost:3000/quizzes')
+    fetch('http://localhost:3000/quiz')
       .then(response => response.json())
       .then(quizzes => {
         this.quizzes = quizzes;

@@ -1,48 +1,26 @@
-// server.js
-const express = require('express')
-const mariadb = require('mariadb')
-const cors = require('cors')
-const app = express()
-const port = process.env.PORT || 3000
-const helmet = require('helmet')
+const db = require('../database/database')
 
-let credentials = require('./credentials.json')
-let hostName = credentials.hostname
-let username = credentials.username
-let pw = credentials.password
-
-const pool = mariadb.createPool({
-  host: hostName,
-  user: username,
-  password: pw,
-  database: 'quiztool',
-  connectionLimit: 5
-})
-
-// Middleware
-app.use(cors())
-app.use(helmet())
-
-app.get('/quizzes', async (req, res) => {
+exports.getQuizzes = async (req, res) => {
   let conn
 
-  // Temporary, gets list of quizzes from database
   try {
-    conn = await pool.getConnection()
+    conn = await db.getConnection()
     const rows = await conn.query('SELECT * FROM quizzes')
     res.json(rows)
   } catch (err) {
     throw err
   } finally {
-    if (conn) return conn.end()
+    if (conn) {
+      await conn.end()
+    }
   }
-})
+}
 
-app.get('/quiz/:id', async (req, res) => {
+exports.getQuizById = async (req, res) => {
   let conn
 
   try {
-    conn = await pool.getConnection()
+    conn = await db.getConnection()
     const { id } = req.params
 
     const quizQuery = 'SELECT * FROM quizzes WHERE quiz_id = ?'
@@ -94,13 +72,13 @@ app.get('/quiz/:id', async (req, res) => {
       conn.end()
     }
   }
-})
+}
 
-app.post('/submit-quiz', express.json(), async (req, res) => {
+exports.submitQuiz = async (req, res) => {
   let conn
 
   try {
-    conn = await pool.getConnection()
+    conn = await db.getConnection()
     const { quizId, answers } = req.body
 
     // Get the correct answers from the database
@@ -142,8 +120,4 @@ app.post('/submit-quiz', express.json(), async (req, res) => {
       conn.end()
     }
   }
-})
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`)
-})
+}

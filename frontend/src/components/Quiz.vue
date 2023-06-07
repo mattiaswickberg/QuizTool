@@ -59,7 +59,7 @@
         },
         
         submitQuiz() {
-      axios.post('http://localhost:3000/submit-quiz', {
+      axios.post('http://localhost:3000/quiz/submit-quiz', {
         quizId: this.quiz.quiz_id,
         answers: this.answers,
       })
